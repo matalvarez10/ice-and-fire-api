@@ -29,14 +29,14 @@ const AddBookView = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-  
+
     const updatedValue =
       name === "authors" || name === "characters"
         ? value.split(",")
         : name === "released"
         ? new Date(value)
         : value;
-  
+
     setFormData({
       ...formData,
       [name]: updatedValue,
@@ -80,6 +80,7 @@ const AddBookView = () => {
           placeholder="Name"
           onChange={handleInputChange}
           value={formData.name}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -88,6 +89,7 @@ const AddBookView = () => {
           placeholder="ISBN"
           onChange={handleInputChange}
           value={formData.isbn}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -96,6 +98,7 @@ const AddBookView = () => {
           placeholder="Book image url"
           onChange={handleInputChange}
           value={formData.imgUrl}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -104,6 +107,7 @@ const AddBookView = () => {
           placeholder="Authors"
           onChange={handleInputChange}
           value={formData.authors.join(",")}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -112,6 +116,7 @@ const AddBookView = () => {
           placeholder="Characters"
           onChange={handleInputChange}
           value={formData.characters.join(",")}
+          required
         />
         <CustomInputComponent
           type="number"
@@ -120,6 +125,7 @@ const AddBookView = () => {
           placeholder="Number of Pages"
           onChange={handleInputChange}
           value={formData.numberOfPages}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -128,6 +134,7 @@ const AddBookView = () => {
           placeholder="Publisher"
           onChange={handleInputChange}
           value={formData.publisher}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -136,6 +143,7 @@ const AddBookView = () => {
           placeholder="Country"
           onChange={handleInputChange}
           value={formData.country}
+          required
         />
         <CustomInputComponent
           type="text"
@@ -144,6 +152,7 @@ const AddBookView = () => {
           placeholder="Media Type"
           onChange={handleInputChange}
           value={formData.mediaType}
+          required
         />
         <CustomInputComponent
           type="date"
@@ -151,6 +160,7 @@ const AddBookView = () => {
           name="released"
           onChange={handleInputChange}
           value={formData.released.toISOString().split("T")[0]}
+          required
         />
         <button className="btn-blue col-span-2" type="submit">
           Add Book
