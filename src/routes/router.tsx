@@ -17,7 +17,8 @@ const Router = () => {
         { path: "/favorites", element: <FavoriteView/> },
         { path: "/add-book", element: <AddBookView/> },
         { path: "/books/:id", element: <BookDetailView/> },
-        { path: "*", element: <ErrorComponent /> }
+        { path: "*", element: <ErrorComponent /> },
+
       ],
     },
   ]);
