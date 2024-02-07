@@ -1,13 +1,21 @@
 import React, { useMemo } from "react";
-import { useTable, Column, CellProps, useGlobalFilter, useSortBy } from "react-table";
+import {
+  useTable,
+  Column,
+  CellProps,
+  useGlobalFilter,
+  useSortBy,
+} from "react-table";
 import { Link } from "react-router-dom";
 import { IBookAddedData } from "../interfaces/bookAddedData.interface";
 import { useOutletContext } from "react-router-dom";
 import { IOutletProps } from "../interfaces/outletProps.interface";
 import { GlobalFilter } from "./globalFilter";
+import { AiFillStar } from "react-icons/ai";
+import { FaBook } from "react-icons/fa6";
 
 interface Props {
-  data: IBookAddedData[]; 
+  data: IBookAddedData[];
 }
 
 const BookTable: React.FC<Props> = ({ data }) => {
@@ -16,8 +24,22 @@ const BookTable: React.FC<Props> = ({ data }) => {
   const columns: Column<IBookAddedData>[] = useMemo(
     () => [
       {
+        id: "icon-book",
+        Cell: (
+          <FaBook
+          fontSize={18}
+          className="text-blue-500"
+          />
+        ),
+      },
+      {
         Header: "Name",
         accessor: "name",
+        sortType: "alphanumeric",
+      },
+      {
+        Header: "Number of Pages",
+        accessor: "numberOfPages",
         sortType: "alphanumeric",
       },
       {
@@ -28,67 +50,89 @@ const BookTable: React.FC<Props> = ({ data }) => {
         ),
       },
       {
-        Header: "More Detail",
+        id: "More Detail",
         Cell: ({ row }: { row: { original: IBookAddedData } }) => (
-          <button>
-            <Link to={`/books/${row.original.isbn}`}>More Detail</Link>
+          <div className="flex flex-row gap-4 justify-center">
+            <button className="bg-blue-500 rounded py-2 px-3 font-raleway text-white text-xs
+            hover:scale-110 transition ease-in duration-300
+            ">
+              <Link to={`/books/${row.original.isbn}`}>More Detail</Link>
+            </button>
+            <button onClick={() => addFavorite(row.original.isbn)} style={{ width: "60px" }}
+            className="transform transition-transform duration-300 hover:scale-110"
+            >
+            <AiFillStar
+            fontSize={20}
+            color={row.original.favorite ? "gold" : "gray"}
+            />
           </button>
-        ),
-      },
-      {
-        Header: "Favorite",
-        Cell: ({ row }: { row: { original: IBookAddedData } }) => (
-          <button
-            style={{ backgroundColor: row.original.favorite ? "blue" : "red" }}
-            onClick={() => addFavorite(row.original.isbn)}
-          >
-            Favorite
-          </button>
+          </div>
+          
         ),
       },
     ],
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,state,setGlobalFilter } =
-    useTable<IBookAddedData>({ columns, data }, useGlobalFilter, useSortBy); 
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = useTable<IBookAddedData>({ columns, data }, useGlobalFilter, useSortBy);
 
-  const {globalFilter} = state; 
+  const { globalFilter } = state;
 
   return (
-    <div className="book-table">
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
-      <table {...getTableProps()} >
-        <thead>
+    <>
+      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+      <table
+        {...getTableProps()}
+        className="table-auto border border-gray-200 shadow-lg rounded-lg w-[60%] bg-white"
+      >
+        <thead className="bg-gray-50 uppercase text-base text-gray-600 font-lato rounded-lg">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}> 
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  className="px-4 py-2 text-left font-medium border-b border-gray-200"
+                >
                   {column.render("Header")}
                   <span>
-                    {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
                   </span>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} className="font-lato text-black">
           {rows.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
+                {row.cells.map((cell) => (
+                  <td
+                    {...cell.getCellProps()}
+                    className="px-4 py-2 border-b border-gray-200 text-sm"
+                  >
+                    {cell.render("Cell")}
+                  </td>
+                ))}
               </tr>
             );
           })}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 
