@@ -9,6 +9,7 @@ import { imgs } from "../assets/imgs";
 const LayoutComponent = () => {
   const [bookData, setBookData] = useState<IBookAddedData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchDatosIniciales = async () => {
@@ -18,12 +19,14 @@ const LayoutComponent = () => {
         const booksWithFavorite: IBookAddedData[] = datos.map((book) => ({
           ...book,
           favorite: false,
-          imgUrl: imgs.find((img) => img.name === book.name)?.imgUrl || ""
+          imgUrl: imgs.find((img) => img.name === book.name)?.imgUrl || "",
         }));
         setBookData(booksWithFavorite);
+        setHasError(false);
       } catch (error) {
+        setHasError(true);
         console.log(error);
-      }finally{
+      } finally {
         setIsLoading(false);
       }
     };
@@ -45,10 +48,11 @@ const LayoutComponent = () => {
   const addBook = (newBook: IBookAddedData) => {
     setBookData((prevBookData) => [...prevBookData, newBook]);
   };
+
   return (
     <BookContext.Provider value={bookData}>
       <HeaderComponent />
-      <Outlet context={{ addFavorite, addBook,isLoading }} />
+      <Outlet context={{ addFavorite, addBook, isLoading, hasError }} />
     </BookContext.Provider>
   );
 };

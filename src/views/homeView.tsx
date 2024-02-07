@@ -1,17 +1,18 @@
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BookContext } from "../hooks/bookContext";
 import BookTable from "../components/tableComponent";
 import AuthorButtonComponent from "../components/authorButtonComponent";
 import LoadingComponent from "../components/loadingComponent";
 import { useOutletContext } from "react-router-dom";
 import { IOutletProps } from "../interfaces/outletProps.interface";
+import ErrorFetchComponent from "../components/errorFetchComponent";
 
 const HomeView: React.FC = () => {
   const books = useContext(BookContext);
   const [uniqueAuthors, setUniqueAuthors] = useState<string[]>([]);
   const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null);
 
-  const { isLoading } = useOutletContext() as IOutletProps;
+  const { isLoading, hasError } = useOutletContext() as IOutletProps;
 
   useEffect(() => {
     const authorsSet = new Set<string>();
@@ -34,7 +35,9 @@ const HomeView: React.FC = () => {
 
   return (
     <div className="main-container">
-      {isLoading ? ( 
+      {hasError ? (
+        <ErrorFetchComponent />
+      ) : isLoading ? (
         <LoadingComponent />
       ) : (
         <>

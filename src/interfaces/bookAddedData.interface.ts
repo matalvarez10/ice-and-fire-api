@@ -1,5 +1,5 @@
 export interface IBookAddedData {
-  url: string;
+  url?: string;
   name: string;
   isbn: string;
   authors: string[];
@@ -11,5 +11,5 @@ export interface IBookAddedData {
   characters: string[];
   povCharacters: string[];
   favorite: boolean;
-  imgUrl?: string;
+  imgUrl: string;
 }

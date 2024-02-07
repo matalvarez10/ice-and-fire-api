@@ -9,6 +9,7 @@ const AddBookView = () => {
 
   const [formData, setFormData] = useState<IBookAddedData>({
     url: "",
+    imgUrl: "",
     name: "",
     isbn: "",
     authors: [],
@@ -28,14 +29,14 @@ const AddBookView = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
+  
     const updatedValue =
-      name === "authors"
+      name === "authors" || name === "characters"
         ? value.split(",")
         : name === "released"
         ? new Date(value)
         : value;
-
+  
     setFormData({
       ...formData,
       [name]: updatedValue,
@@ -47,6 +48,7 @@ const AddBookView = () => {
     setShowSuccessMessage(true);
     addBook(formData);
     setFormData({
+      imgUrl: "",
       url: "",
       name: "",
       isbn: "",
@@ -67,7 +69,10 @@ const AddBookView = () => {
 
   return (
     <div className="main-container">
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 w-[90%] md:w-[60%]">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 gap-4 w-[90%] md:w-[60%]"
+      >
         <CustomInputComponent
           type="text"
           labelText="Name"
@@ -75,7 +80,6 @@ const AddBookView = () => {
           placeholder="Name"
           onChange={handleInputChange}
           value={formData.name}
-          
         />
         <CustomInputComponent
           type="text"
@@ -84,7 +88,14 @@ const AddBookView = () => {
           placeholder="ISBN"
           onChange={handleInputChange}
           value={formData.isbn}
-          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Book image url"
+          name="imgUrl"
+          placeholder="Book image url"
+          onChange={handleInputChange}
+          value={formData.imgUrl}
         />
         <CustomInputComponent
           type="text"
@@ -93,7 +104,14 @@ const AddBookView = () => {
           placeholder="Authors"
           onChange={handleInputChange}
           value={formData.authors.join(",")}
-          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Characters (comma-separated)"
+          name="characters"
+          placeholder="Characters"
+          onChange={handleInputChange}
+          value={formData.characters.join(",")}
         />
         <CustomInputComponent
           type="number"
@@ -102,7 +120,6 @@ const AddBookView = () => {
           placeholder="Number of Pages"
           onChange={handleInputChange}
           value={formData.numberOfPages}
-          
         />
         <CustomInputComponent
           type="text"
@@ -111,7 +128,6 @@ const AddBookView = () => {
           placeholder="Publisher"
           onChange={handleInputChange}
           value={formData.publisher}
-          
         />
         <CustomInputComponent
           type="text"
@@ -120,7 +136,6 @@ const AddBookView = () => {
           placeholder="Country"
           onChange={handleInputChange}
           value={formData.country}
-          
         />
         <CustomInputComponent
           type="text"
@@ -129,7 +144,6 @@ const AddBookView = () => {
           placeholder="Media Type"
           onChange={handleInputChange}
           value={formData.mediaType}
-          
         />
         <CustomInputComponent
           type="date"
@@ -137,14 +151,15 @@ const AddBookView = () => {
           name="released"
           onChange={handleInputChange}
           value={formData.released.toISOString().split("T")[0]}
-          
         />
         <button className="btn-blue col-span-2" type="submit">
           Add Book
         </button>
       </form>
       {showSuccessMessage && (
-        <div className="text-green-950 font-bold font-raleway text-3xl">Book added successfully!</div>
+        <div className="text-green-950 font-bold font-raleway text-3xl">
+          Book added successfully!
+        </div>
       )}
     </div>
   );
