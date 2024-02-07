@@ -2,11 +2,16 @@ import { useState, useContext, useEffect } from "react";
 import { BookContext } from "../hooks/bookContext";
 import BookTable from "../components/tableComponent";
 import AuthorButtonComponent from "../components/authorButtonComponent";
+import LoadingComponent from "../components/loadingComponent";
+import { useOutletContext } from "react-router-dom";
+import { IOutletProps } from "../interfaces/outletProps.interface";
 
 const HomeView: React.FC = () => {
   const books = useContext(BookContext);
   const [uniqueAuthors, setUniqueAuthors] = useState<string[]>([]);
   const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null);
+
+  const { isLoading } = useOutletContext() as IOutletProps;
 
   useEffect(() => {
     const authorsSet = new Set<string>();
@@ -29,22 +34,28 @@ const HomeView: React.FC = () => {
 
   return (
     <div className="main-container">
-      <div className="flex flex-row gap-4">
-        {uniqueAuthors.map((author) => (
-          <AuthorButtonComponent
-            key={author}
-            author={author}
-            selectedAuthor={selectedAuthor}
-            onClick={handleAuthorButtonClick}
-          />
-        ))}
-        <AuthorButtonComponent
-          author="Show All Authors"
-          selectedAuthor={selectedAuthor}
-          onClick={() => setSelectedAuthor(null)}
-        />
-      </div>
-      <BookTable data={filteredBooks} />
+      {isLoading ? ( 
+        <LoadingComponent />
+      ) : (
+        <>
+          <div className="flex flex-row gap-4">
+            {uniqueAuthors.map((author) => (
+              <AuthorButtonComponent
+                key={author}
+                author={author}
+                selectedAuthor={selectedAuthor}
+                onClick={handleAuthorButtonClick}
+              />
+            ))}
+            <AuthorButtonComponent
+              author="Show All Authors"
+              selectedAuthor={selectedAuthor}
+              onClick={() => setSelectedAuthor(null)}
+            />
+          </div>
+          <BookTable data={filteredBooks} />
+        </>
+      )}
     </div>
   );
 };

@@ -54,7 +54,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
               hover:scale-110 transition ease-in duration-300
               "
             >
-              More Detail
+              More Details
             </Link>
             <button
               onClick={() => addFavorite(row.original.isbn)}

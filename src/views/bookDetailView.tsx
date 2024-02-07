@@ -13,6 +13,7 @@ const BookDetailView = () => {
     <section className="main-container">
       {chosenBook && <BookCardComponent book={chosenBook}/>}
         <Link to="/" className="py-3 px-10 rounded bg-blue-600 text-white font-raleway">Go Back</Link>
+        
     </section>
   );
 };

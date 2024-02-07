@@ -8,9 +8,11 @@ import { imgs } from "../assets/imgs";
 
 const LayoutComponent = () => {
   const [bookData, setBookData] = useState<IBookAddedData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchDatosIniciales = async () => {
+      setIsLoading(true);
       try {
         const datos = await fetchData();
         const booksWithFavorite: IBookAddedData[] = datos.map((book) => ({
@@ -21,6 +23,8 @@ const LayoutComponent = () => {
         setBookData(booksWithFavorite);
       } catch (error) {
         console.log(error);
+      }finally{
+        setIsLoading(false);
       }
     };
 
@@ -44,7 +48,7 @@ const LayoutComponent = () => {
   return (
     <BookContext.Provider value={bookData}>
       <HeaderComponent />
-      <Outlet context={{ addFavorite, addBook }} />
+      <Outlet context={{ addFavorite, addBook,isLoading }} />
     </BookContext.Provider>
   );
 };
