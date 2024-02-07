@@ -25,12 +25,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
     () => [
       {
         id: "icon-book",
-        Cell: (
-          <FaBook
-          fontSize={18}
-          className="text-blue-500"
-          />
-        ),
+        Cell: <FaBook fontSize={18} className="text-blue-500" />,
       },
       {
         Header: "Name",
@@ -50,24 +45,28 @@ const BookTable: React.FC<Props> = ({ data }) => {
         ),
       },
       {
-        id: "More Detail",
+        id: "More Details",
         Cell: ({ row }: { row: { original: IBookAddedData } }) => (
           <div className="flex flex-row gap-4 justify-center">
-            <button className="bg-blue-500 rounded py-2 px-3 font-raleway text-white text-xs
-            hover:scale-110 transition ease-in duration-300
-            ">
-              <Link to={`/books/${row.original.isbn}`}>More Detail</Link>
-            </button>
-            <button onClick={() => addFavorite(row.original.isbn)} style={{ width: "60px" }}
-            className="transform transition-transform duration-300 hover:scale-110"
+            <Link
+              to={`/books/${row.original.isbn}`}
+              className="bg-blue-500 rounded py-2 px-3 font-raleway text-white text-xs
+              hover:scale-110 transition ease-in duration-300
+              "
             >
-            <AiFillStar
-            fontSize={20}
-            color={row.original.favorite ? "gold" : "gray"}
-            />
-          </button>
+              More Detail
+            </Link>
+            <button
+              onClick={() => addFavorite(row.original.isbn)}
+              style={{ width: "60px" }}
+              className="transform transition-transform duration-300 hover:scale-110"
+            >
+              <AiFillStar
+                fontSize={20}
+                color={row.original.favorite ? "gold" : "gray"}
+              />
+            </button>
           </div>
-          
         ),
       },
     ],

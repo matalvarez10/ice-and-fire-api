@@ -1,31 +1,41 @@
-import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import { IBookAddedData } from '../interfaces/bookAddedData.interface';
-import { IOutletProps } from '../interfaces/outletProps.interface';
+import React, { useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { IBookAddedData } from "../interfaces/bookAddedData.interface";
+import { IOutletProps } from "../interfaces/outletProps.interface";
+import CustomInputComponent from "../components/customInputComponent";
 
 const AddBookView = () => {
   const { addBook } = useOutletContext() as IOutletProps;
 
   const [formData, setFormData] = useState<IBookAddedData>({
-    url: '',
-    name: '',
-    isbn: '',
+    url: "",
+    name: "",
+    isbn: "",
     authors: [],
     numberOfPages: 0,
-    publisher: '',
-    country: '',
-    mediaType: '',
+    publisher: "",
+    country: "",
+    mediaType: "",
     released: new Date(),
     characters: [],
     povCharacters: [],
     favorite: false,
   });
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-  
-    const updatedValue = name === 'authors' ? value.split(',') : name === 'released' ? new Date(value) : value;
-  
+
+    const updatedValue =
+      name === "authors"
+        ? value.split(",")
+        : name === "released"
+        ? new Date(value)
+        : value;
+
     setFormData({
       ...formData,
       [name]: updatedValue,
@@ -34,72 +44,109 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaE
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowSuccessMessage(true);
     addBook(formData);
     setFormData({
-      url: '',
-      name: '',
-      isbn: '',
+      url: "",
+      name: "",
+      isbn: "",
       authors: [],
       numberOfPages: 0,
-      publisher: '',
-      country: '',
-      mediaType: '',
+      publisher: "",
+      country: "",
+      mediaType: "",
       released: new Date(),
       characters: [],
       povCharacters: [],
       favorite: false,
     });
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        URL:
-        <input type="text" name="url" value={formData.url} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Name:
-        <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        ISBN:
-        <input type="text" name="isbn" value={formData.isbn} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Authors (comma-separated):
-        <input type="text" name="authors" value={formData.authors.join(',')} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Number of Pages:
-        <input type="number" name="numberOfPages" value={formData.numberOfPages} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Publisher:
-        <input type="text" name="publisher" value={formData.publisher} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Country:
-        <input type="text" name="country" value={formData.country} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Media Type:
-        <input type="text" name="mediaType" value={formData.mediaType} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        Released:
-        <input type="date" name="released" value={formData.released.toISOString().split('T')[0]} onChange={handleInputChange} />
-      </label>
-      <br />
-      <button type="submit">Add Book</button>
-    </form>
+    <div className="main-container">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 w-[60%]">
+        <CustomInputComponent
+          type="text"
+          labelText="Name"
+          name="name"
+          placeholder="Name"
+          onChange={handleInputChange}
+          value={formData.name}
+          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="ISBN"
+          name="isbn"
+          placeholder="ISBN"
+          onChange={handleInputChange}
+          value={formData.isbn}
+          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Authors (comma-separated)"
+          name="authors"
+          placeholder="Authors"
+          onChange={handleInputChange}
+          value={formData.authors.join(",")}
+          
+        />
+        <CustomInputComponent
+          type="number"
+          labelText="Number of Pages"
+          name="numberOfPages"
+          placeholder="Number of Pages"
+          onChange={handleInputChange}
+          value={formData.numberOfPages}
+          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Publisher"
+          name="publisher"
+          placeholder="Publisher"
+          onChange={handleInputChange}
+          value={formData.publisher}
+          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Country"
+          name="country"
+          placeholder="Country"
+          onChange={handleInputChange}
+          value={formData.country}
+          
+        />
+        <CustomInputComponent
+          type="text"
+          labelText="Media Type"
+          name="mediaType"
+          placeholder="Media Type"
+          onChange={handleInputChange}
+          value={formData.mediaType}
+          
+        />
+        <CustomInputComponent
+          type="date"
+          labelText="Released"
+          name="released"
+          onChange={handleInputChange}
+          value={formData.released.toISOString().split("T")[0]}
+          
+        />
+        <button className="btn-blue col-span-2" type="submit">
+          Add Book
+        </button>
+      </form>
+      {showSuccessMessage && (
+        <div className="text-green-950 font-bold font-raleway text-3xl">Book added successfully!</div>
+      )}
+    </div>
   );
 };
 

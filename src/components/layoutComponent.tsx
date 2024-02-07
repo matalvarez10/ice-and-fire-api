@@ -4,6 +4,7 @@ import HeaderComponent from "./headerComponent";
 import { fetchData } from "../services/fetchLibros";
 import { IBookAddedData } from "../interfaces/bookAddedData.interface";
 import { BookContext } from "../hooks/bookContext";
+import { imgs } from "../assets/imgs";
 
 const LayoutComponent = () => {
   const [bookData, setBookData] = useState<IBookAddedData[]>([]);
@@ -15,6 +16,7 @@ const LayoutComponent = () => {
         const booksWithFavorite: IBookAddedData[] = datos.map((book) => ({
           ...book,
           favorite: false,
+          imgUrl: imgs.find((img) => img.name === book.name)?.imgUrl || ""
         }));
         setBookData(booksWithFavorite);
       } catch (error) {
@@ -42,7 +44,7 @@ const LayoutComponent = () => {
   return (
     <BookContext.Provider value={bookData}>
       <HeaderComponent />
-      <Outlet context={{ addFavorite,addBook }} />
+      <Outlet context={{ addFavorite, addBook }} />
     </BookContext.Provider>
   );
 };

@@ -28,7 +28,7 @@ const HomeView: React.FC = () => {
     : books;
 
   return (
-    <div className="bg-white py-20 h-screen w-screen flex flex-col items-center gap-4">
+    <div className="main-container">
       <div className="flex flex-row gap-4">
         {uniqueAuthors.map((author) => (
           <AuthorButtonComponent

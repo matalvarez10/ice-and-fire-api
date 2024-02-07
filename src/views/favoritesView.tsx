@@ -6,10 +6,9 @@ import BookTable from "../components/tableComponent";
 const FavoriteView = () => {
   const books = useContext(BookContext);
   return (
-    <>
-      <h1>this is the favorites view</h1>
+    <div className="main-container">
       <BookTable data={books.filter(book => book.favorite)}/>
-    </>
+    </div>
   );
 };
 

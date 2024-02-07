@@ -11,4 +11,5 @@ export interface IBookAddedData {
   characters: string[];
   povCharacters: string[];
   favorite: boolean;
+  imgUrl?: string;
 }
