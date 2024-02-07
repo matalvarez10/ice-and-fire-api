@@ -38,7 +38,7 @@ const HomeView: React.FC = () => {
         <LoadingComponent />
       ) : (
         <>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 m-1 mb-3 flex-wrap">
             {uniqueAuthors.map((author) => (
               <AuthorButtonComponent
                 key={author}

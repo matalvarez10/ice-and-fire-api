@@ -67,7 +67,7 @@ const AddBookView = () => {
 
   return (
     <div className="main-container">
-      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 w-[60%]">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 w-[90%] md:w-[60%]">
         <CustomInputComponent
           type="text"
           labelText="Name"

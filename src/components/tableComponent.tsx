@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import {
   useTable,
   Column,
@@ -13,6 +13,7 @@ import { IOutletProps } from "../interfaces/outletProps.interface";
 import { GlobalFilter } from "./globalFilter";
 import { AiFillStar } from "react-icons/ai";
 import { FaBook } from "react-icons/fa6";
+import { FaPenClip } from "react-icons/fa6";
 
 interface Props {
   data: IBookAddedData[];
@@ -21,6 +22,20 @@ interface Props {
 const BookTable: React.FC<Props> = ({ data }) => {
   const { addFavorite } = useOutletContext() as IOutletProps;
 
+  const [isLGScreen, setIsLGScreen] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLGScreen(window.innerWidth >= 1024);
+    };
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    setIsLGScreen(window.innerWidth >= 1024); 
+  }, []);
   const columns: Column<IBookAddedData>[] = useMemo(
     () => [
       {
@@ -28,16 +43,19 @@ const BookTable: React.FC<Props> = ({ data }) => {
         Cell: <FaBook fontSize={18} className="text-blue-500" />,
       },
       {
+        id: "name",
         Header: "Name",
         accessor: "name",
         sortType: "alphanumeric",
       },
       {
+        id: "n-pages",
         Header: "Number of Pages",
         accessor: "numberOfPages",
         sortType: "alphanumeric",
       },
       {
+        id: "authors",
         Header: "Authors",
         accessor: "authors",
         Cell: ({ value }: CellProps<IBookAddedData, string[]>) => (
@@ -45,7 +63,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
         ),
       },
       {
-        id: "More Details",
+        id: "More-Details",
         Cell: ({ row }: { row: { original: IBookAddedData } }) => (
           <div className="flex flex-row gap-4 justify-center">
             <Link
@@ -54,7 +72,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
               hover:scale-110 transition ease-in duration-300
               "
             >
-              More Details
+              {!isLGScreen ? <FaPenClip /> : "More details"}
             </Link>
             <button
               onClick={() => addFavorite(row.original.isbn)}
@@ -70,8 +88,16 @@ const BookTable: React.FC<Props> = ({ data }) => {
         ),
       },
     ],
-    []
+    [isLGScreen]
   );
+
+  const initialState = useMemo(() => {
+    if (!isLGScreen) {
+      return { hiddenColumns: ["icon-book", "n-pages"] };
+    } else {
+      return { hiddenColumns: [] };
+    }
+  }, [isLGScreen]);
 
   const {
     getTableProps,
@@ -81,7 +107,11 @@ const BookTable: React.FC<Props> = ({ data }) => {
     prepareRow,
     state,
     setGlobalFilter,
-  } = useTable<IBookAddedData>({ columns, data }, useGlobalFilter, useSortBy);
+  } = useTable<IBookAddedData>(
+    { columns, data, initialState },
+    useGlobalFilter,
+    useSortBy
+  );
 
   const { globalFilter } = state;
 
@@ -90,7 +120,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <table
         {...getTableProps()}
-        className="table-auto border border-gray-200 shadow-lg rounded-lg w-[60%] bg-white"
+        className="table-auto border border-gray-200 shadow-lg rounded-lg w-[95%] lg:w-[70%] bg-white"
       >
         <thead className="bg-gray-50 uppercase text-base text-gray-600 font-lato rounded-lg">
           {headerGroups.map((headerGroup) => (
@@ -121,7 +151,7 @@ const BookTable: React.FC<Props> = ({ data }) => {
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
-                    className="px-4 py-2 border-b border-gray-200 text-sm"
+                    className="px-4 py-2 border-b border-gray-200 text-xs lg:text-sm"
                   >
                     {cell.render("Cell")}
                   </td>

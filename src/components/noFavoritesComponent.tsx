@@ -4,7 +4,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 const NoFavoritesComponent = () => {
   return (
     <article className="h-[500px] flex justify-center items-center flex-col gap-5">
-      <p className="section-header font-light text-4xl">
+      <p className="section-header font-light text-xl lg:text-4xl">
         No favorites Found - Add some Favorites!{" "}
       </p>
       <Link

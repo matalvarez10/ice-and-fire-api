@@ -13,9 +13,9 @@ const AuthorButtonComponent: React.FC<AuthorButtonProps> = ({
 }) => {
   return (
     <button
-      className={`bg-blue-500 py-2 px-4 ${
+      className={`bg-blue-500 py-2 px-2 lg:px-4 ${
         selectedAuthor === author ? "bg-blue-700" : ""
-      } text-white font-raleway rounded-full text-sm` }
+      } text-white font-raleway rounded-full  text-xs lg:text-sm` }
       onClick={() => onClick(author)}
     >
       {author}
