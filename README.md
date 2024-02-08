@@ -1,30 +1,17 @@
-# React + TypeScript + Vite
+# Libreria con API of Ice and Fire
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Este proyecto muestra y organiza libros, pudiendo agregar,borrar y agregar a favoritos estos. Se utilizaron como herramientas principales React, TypeScript, Tailwind, Jest y Storybook.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instalacion
 
-## Expanding the ESLint configuration
+Los pasos para la instalación del proyecto son los siguientes:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clonar el repositorio a su maquina local utilizando `git clone https://github.com/matalvarez10/ice-and-fire-api`.
 
-- Configure the top-level `parserOptions` property like this:
+2. Ir a la carpeta del proyecto.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+3. Instalar dependencias necesarias con `npm install`.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+4. Iniciar el servidor de desarrollo con `npm run dev`.
