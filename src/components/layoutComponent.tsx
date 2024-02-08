@@ -49,10 +49,16 @@ const LayoutComponent = () => {
     setBookData((prevBookData) => [...prevBookData, newBook]);
   };
 
+  const deleteBook = (isbn: string) => {
+    setBookData((prevBookData) => {
+      return prevBookData.filter((book) => book.isbn !== isbn);
+    });
+  };
+
   return (
     <BookContext.Provider value={bookData}>
       <HeaderComponent />
-      <Outlet context={{ addFavorite, addBook, isLoading, hasError }} />
+      <Outlet context={{ addFavorite, addBook, isLoading, hasError , deleteBook }} />
     </BookContext.Provider>
   );
 };

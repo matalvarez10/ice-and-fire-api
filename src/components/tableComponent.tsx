@@ -14,13 +14,14 @@ import { GlobalFilter } from "./globalFilter";
 import { AiFillStar } from "react-icons/ai";
 import { FaBook } from "react-icons/fa6";
 import { FaPenClip } from "react-icons/fa6";
+import { FaTrashAlt } from "react-icons/fa";
 
 interface Props {
   data: IBookAddedData[];
 }
 
 const BookTable: React.FC<Props> = ({ data }) => {
-  const { addFavorite } = useOutletContext() as IOutletProps;
+  const { addFavorite , deleteBook } = useOutletContext() as IOutletProps;
 
   const [isLGScreen, setIsLGScreen] = useState<boolean>(true);
 
@@ -28,13 +29,13 @@ const BookTable: React.FC<Props> = ({ data }) => {
     const handleResize = () => {
       setIsLGScreen(window.innerWidth >= 1024);
     };
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    setIsLGScreen(window.innerWidth >= 1024); 
+    setIsLGScreen(window.innerWidth >= 1024);
   }, []);
   const columns: Column<IBookAddedData>[] = useMemo(
     () => [
@@ -76,12 +77,20 @@ const BookTable: React.FC<Props> = ({ data }) => {
             </Link>
             <button
               onClick={() => addFavorite(row.original.isbn)}
-              style={{ width: "60px" }}
               className="transform transition-transform duration-300 hover:scale-110"
             >
               <AiFillStar
                 fontSize={20}
                 color={row.original.favorite ? "gold" : "gray"}
+              />
+            </button>
+            <button
+              onClick={() => deleteBook(row.original.isbn)}
+              className="transform transition-transform duration-300 hover:scale-110"
+            >
+              <FaTrashAlt
+                fontSize={20}
+                color="red"
               />
             </button>
           </div>

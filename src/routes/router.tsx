@@ -6,7 +6,6 @@ import AddBookView from "../views/addBookView";
 import BookDetailView from "../views/bookDetailView";
 import App from "../App";
 
-
 const Router = () => {
   const router = createBrowserRouter([
     {
@@ -14,11 +13,10 @@ const Router = () => {
       element: <App />,
       children: [
         { path: "/", element: <HomeView /> },
-        { path: "/favorites", element: <FavoriteView/> },
-        { path: "/add-book", element: <AddBookView/> },
-        { path: "/books/:id", element: <BookDetailView/> },
+        { path: "/favorites", element: <FavoriteView /> },
+        { path: "/add-book", element: <AddBookView /> },
+        { path: "/books/:id", element: <BookDetailView /> },
         { path: "*", element: <ErrorComponent /> },
-
       ],
     },
   ]);

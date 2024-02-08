@@ -5,4 +5,5 @@ export interface IOutletProps{
     addBook: (newBook: IBookAddedData) => void;
     isLoading: boolean;
     hasError: boolean;
+    deleteBook: (isbn: string) => void;
   };

@@ -15,16 +15,16 @@ export const DateInput: Story = {
   args: {
     type: "date",
     labelText: "Released",
-    name:"released",
-    required : true
+    name: "released",
+    required: true,
   },
 };
 export const TextInput: Story = {
   args: {
     type: "text",
     labelText: "Example",
-    name:"name",
-    required : true
+    name: "name",
+    required: true,
   },
 };
 

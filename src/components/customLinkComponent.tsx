@@ -8,7 +8,10 @@ const CustomLinkComponent = ({
   text: string;
 }) => {
   return (
-    <Link to={toRoute} className="text-xs hover:border-b-[2px] border-white md:text-base">
+    <Link
+      to={toRoute}
+      className="text-xs hover:border-b-[2px] border-white md:text-base"
+    >
       {text}
     </Link>
   );

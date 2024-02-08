@@ -12,8 +12,7 @@ const meta: Meta<typeof ErrorComponent> = {
 type Story = StoryObj<typeof ErrorComponent>;
 
 export const ErrorMessage: Story = {
-  args: {
-  },
+  args: {},
 };
 
 export default meta;

@@ -12,8 +12,7 @@ const meta: Meta<typeof NoFavoritesComponent> = {
 type Story = StoryObj<typeof NoFavoritesComponent>;
 
 export const MainMessage: Story = {
-  args: {
-  },
+  args: {},
 };
 
 export default meta;

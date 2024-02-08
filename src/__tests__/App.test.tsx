@@ -1,5 +1,3 @@
-// src/__tests__/App.test.tsx
-
 import '@testing-library/jest-dom'
 import { render } from "@testing-library/react"
 import { MemoryRouter } from 'react-router-dom'; 

@@ -7,18 +7,18 @@ const meta: Meta<typeof AuthorButtonComponent> = {
   title: "Components/Author Button",
   component: AuthorButtonComponent,
   decorators: [withRouter],
-  argTypes:{
-    onClick:{
-        action: "handleClick"
-    }
-  }
+  argTypes: {
+    onClick: {
+      action: "handleClick",
+    },
+  },
 };
 
 type Story = StoryObj<typeof AuthorButtonComponent>;
 
 export const TodosLosDatos: Story = {
   args: {
-    author:"George R R Martin"
+    author: "George R R Martin",
   },
 };
 

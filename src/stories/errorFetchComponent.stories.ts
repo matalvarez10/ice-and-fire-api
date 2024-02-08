@@ -12,8 +12,7 @@ const meta: Meta<typeof ErrorFetchComponent> = {
 type Story = StoryObj<typeof ErrorFetchComponent>;
 
 export const ErrorWhenFetchingData: Story = {
-  args: {
-  },
+  args: {},
 };
 
 export default meta;

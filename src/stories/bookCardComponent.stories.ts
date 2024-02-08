@@ -26,7 +26,7 @@ export const TodosLosDatos: Story = {
       characters: ["Character 3", "Character 4"],
       mediaType: "book",
       released: new Date(),
-      favorite:false
+      favorite: false,
     },
   },
 };

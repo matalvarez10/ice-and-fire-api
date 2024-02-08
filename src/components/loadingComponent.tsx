@@ -17,7 +17,9 @@ const LoadingComponent = () => {
           fill="currentFill"
         />
       </svg>
-      <span className="font-raleway text-xl font-bold text-blue-950">Loading...</span>
+      <span className="font-raleway text-xl font-bold text-blue-950">
+        Loading...
+      </span>
     </div>
   );
 };

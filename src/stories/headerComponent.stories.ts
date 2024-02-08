@@ -12,8 +12,7 @@ const meta: Meta<typeof HeaderComponent> = {
 type Story = StoryObj<typeof HeaderComponent>;
 
 export const CompleteHeader: Story = {
-  args: {
-  },
+  args: {},
 };
 
 export default meta;

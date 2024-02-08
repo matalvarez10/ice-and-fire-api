@@ -12,8 +12,7 @@ const meta: Meta<typeof LoadingComponent> = {
 type Story = StoryObj<typeof LoadingComponent>;
 
 export const LoadingAnimation: Story = {
-  args: {
-  },
+  args: {},
 };
 
 export default meta;

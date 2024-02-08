@@ -5,16 +5,15 @@ import NoFavoritesComponent from "../components/noFavoritesComponent";
 
 const FavoriteView = () => {
   const books = useContext(BookContext);
-  
-  // Check if there are any favorite books
-  const hasFavorites = books.some(book => book.favorite);
+
+  const hasFavorites = books.some((book) => book.favorite);
 
   return (
     <div className="main-container">
-      {hasFavorites ? ( 
-        <BookTable data={books.filter(book => book.favorite)} />
+      {hasFavorites ? (
+        <BookTable data={books.filter((book) => book.favorite)} />
       ) : (
-        <NoFavoritesComponent/>
+        <NoFavoritesComponent />
       )}
     </div>
   );

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof CustomLinkComponent>;
 export const LinkText: Story = {
   args: {
     text: "Category",
-    toRoute: "/"
+    toRoute: "/",
   },
 };
 
