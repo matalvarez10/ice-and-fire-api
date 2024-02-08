@@ -4,7 +4,12 @@
 
 ## Resumen
 
-Este proyecto muestra y organiza libros, pudiendo agregar, borrar, agregar a favoritos y mostrar los principales detalles de estos. Se utilizaron como herramientas principales React, TypeScript, Tailwind, Jest y Storybook.
+Este proyecto muestra y organiza libros, pudiendo agregar, borrar, agregar a favoritos y mostrar los principales detalles de estos. Se utilizaron como herramientas principales React, TypeScript, Tailwind, Jest y Storybook. Tambien se añadio diseño responsivo para que la aplicación pueda ser utilizada en cualquier dispositivo.
+
+## Requerimientos 
+
+- Node.js
+- Node package manager (npm)
 
 ## Instalación
 
@@ -40,7 +45,7 @@ Los pasos para visualizar la documentación con Storybook son:
    - Decidí utilizar TypeScript debido a la experiencia previa que tengo trabajando con este lenguaje, además de la utilidad que tiene al momento de trabajar con datos estructurados, gracias a los tipos/interfaces. También utilicé Tailwind, debido a que me permite desarrollar de manera más ágil los estilos de la aplicación.
 
 2. ¿Hay alguna mejora que dejaste pendiente de hacer en su envío?
-   - Principalmente añadir una mayor cantidad de pruebas unitarias, y además agregar la totalidad de componentes a la documentación de Storybook.
+   - Principalmente añadir una mayor cantidad de pruebas unitarias, y además agregar más componentes a la documentación de Storybook.
 
 3. ¿Qué harías de manera diferente si se le asignara más tiempo?
    - Utilizar alguna herramienta para almacenar los datos del usuario, como LocalStorage o la implementación de una base de datos.
