@@ -44,3 +44,4 @@ Los pasos para visualizar la documentación con Storybook son:
 
 3. ¿Qué harías de manera diferente si se le asignara más tiempo?
    - Utilizar alguna herramienta para almacenar los datos del usuario, como LocalStorage o la implementación de una base de datos.
+   - Hacer deploy.
